@@ -15,7 +15,7 @@ return [
 
     'defaults' => [
         'guard' => 'web',
-        'passwords' => 'users',
+        'passwords' => 'tbl_users',
     ],
 
     /*
@@ -38,13 +38,28 @@ return [
     'guards' => [
         'web' => [
             'driver' => 'session',
-            'provider' => 'users',
+            'provider' => 'tbl_users',
         ],
 
         'api' => [
             'driver' => 'token',
-            'provider' => 'users',
+            'provider' => 'tbl_users',
             'hash' => false,
+        ],
+
+        'admin' => [
+            'driver' => 'session',
+            'provider' => 'tbl_users',
+        ],
+
+        'guru' => [
+            'driver' => 'session',
+            'provider' => 'tbl_users',
+        ],
+
+        'siswa' => [
+            'driver' => 'session',
+            'provider' => 'tbl_users',
         ],
     ],
 
@@ -66,17 +81,16 @@ return [
     */
 
     'providers' => [
-        'users' => [
+        'tbl_users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
         ],
 
-        // 'users' => [
+        // 'tbl_users' => [
         //     'driver' => 'database',
-        //     'table' => 'users',
+        //     'table' => 'tbl_users',
         // ],
     ],
-
     /*
     |--------------------------------------------------------------------------
     | Resetting Passwords
@@ -93,11 +107,11 @@ return [
     */
 
     'passwords' => [
-        'users' => [
-            'provider' => 'users',
+        'tbl_users' => [
+            'provider' => 'tbl_users',
             'table' => 'password_resets',
             'expire' => 60,
-            'throttle' => 60,
+            // 'throttle' => 60,
         ],
     ],
 
@@ -113,5 +127,4 @@ return [
     */
 
     'password_timeout' => 10800,
-
 ];

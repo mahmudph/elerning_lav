@@ -16,12 +16,26 @@ class RedirectIfAuthenticated
      * @param  string|null  $guard
      * @return mixed
      */
-    public function handle($request, Closure $next, $guard = null)
+    public function handle( $request, Closure $next, $guard = null)
     {
+        // dd(Auth::guard('siswa')->check());
         if (Auth::guard($guard)->check()) {
-            return redirect(RouteServiceProvider::HOME);
+            return $this->redirectTo();
         }
-
+        // dd($next($request));
         return $next($request);
+    }
+    
+    public function redirectTo()
+    {
+        $user= Auth::user();
+        switch($user->role) {
+            case 'siswa': 
+                return redirect("/siswa");
+            case 'guru':
+                return redirect('/guru');
+            case 'admin': 
+                return redirect('/admin');
+        }   
     }
 }

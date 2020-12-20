@@ -21,8 +21,12 @@ class Guru extends Model
         'lulusan'
      ];
 
-     
+    /* tabel name */
+    protected $table = 'tbl_gurus';
+
+
     public function mengajar() {
-        $this->hasMany(Guru_mengajar::class);
+        return $this->hasMany(Guru_mengajar::class, 'id_guru', 'id');
     }
+
 }

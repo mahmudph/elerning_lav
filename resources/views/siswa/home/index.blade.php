@@ -1,73 +1,47 @@
 @extends('layouts/app_siswa')
 
-{{-- title  --}}
-@section('title', 'Page Title')
-
-{{-- for halaman  --}}
-@section('halaman', 'dashboard')
+@section('title', $title ?? "")
+@section('halaman', $halaman ?? "")
 
 @section('content')
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-info">
-          <div class="inner">
-            <h3>150</h3>
-
-            <p>New Orders</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-bag"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
+  <div class="container">
+    <div class="card">
+      <div class="card-header">
       </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-success">
-          <div class="inner">
-            <h3>53<sup style="font-size: 20px">%</sup></h3>
-
-            <p>Bounce Rate</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-stats-bars"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      <div class="card-body">
+           @isset($pelajarans)
+                @foreach (array_chunk($pelajarans, 3) as $chuck)
+                    <div class="row">
+                        @foreach($chuck as  $pelajaran)
+                            <div class="col-md-4">
+                                <div class="card"  style="min-height: 170px; max-height:170px">
+                                    <div class="card-header bg-success">
+                                        <div class="float-left">
+                                            <b>{{ Str::upper($pelajaran['nama_pelajaran']) ?? '' }}</b>
+                                        </div>
+                                        <div class="float-right">
+                                            <small>{{ $pelajaran['nama_kelas'] ?? '' }}</small>
+                                        </div>
+                                    </div>
+                                    <div class="card-body">
+                                        <small class="font-size:10px">{{ $pelajaran['deskripsi_pelajaran']}}</small>
+                                    </div>
+                                    <div class="card-footer">
+                                        <div class="float-left" >
+                                            <p style="font-size:12px">Nama Pengajar <b>{{ $pelajaran['nama_guru'] }}</b></p>
+                                        </div>
+                                        <div class="float-right">
+                                            <a href="{{ route('siswa.data_tugas.detail',['id_kelas' => $pelajaran['id_kelas'], 'id_pengajaran' =>$pelajaran['id']])}}" class="btn btn-info btn-xs">Tugas</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                @endforeach
+           @endisset
         </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-warning">
-          <div class="inner">
-            <h3>44</h3>
-
-            <p>User Registrations</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-person-add"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
-      <!-- ./col -->
-      <div class="col-lg-3 col-6">
-        <!-- small box -->
-        <div class="small-box bg-danger">
-          <div class="inner">
-            <h3>65</h3>
-
-            <p>Unique Visitors</p>
-          </div>
-          <div class="icon">
-            <i class="ion ion-pie-graph"></i>
-          </div>
-          <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
-        </div>
-      </div>
     </div>
   </div>
 @endsection
+

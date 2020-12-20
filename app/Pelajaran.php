@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Pelajaran extends Model
 {
+     /* tabel name */
+    protected $table = 'tbl_pelajarans';
 
     /**
      * The attributes that should be mutated to dates.
@@ -14,18 +16,19 @@ class Pelajaran extends Model
      * @var array
      */
     protected $dates = ['created_at', 'updated_at'];
-    
+
     /**
      * The attributes that are mass assignable.
      *
      * @var array
      */
     protected $fillable = [
-        'nama_pelajaran', 
+        'nama_pelajaran',
+        'deskripsi',
     ];
-    
+
     public function guru_mengajar() {
-        $this->belongsToMany(Guru_mengajar::class);
+        $this->belongsTo(Guru_mengajar::class);
     }
-    
+
 }

@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Siswa_kelas extends Model
 {
+     /* tabel name */
+    protected $table = 'tbl_siswa_kelas';
     /**
      * The attributes that should be mutated to dates.
      *
@@ -21,16 +23,24 @@ class Siswa_kelas extends Model
      * @var array
      */
     protected $fillable = [
-        'id_kelas', 
+        'id_kelas',
         'id_siswa'
     ];
 
 
     public function siswa() {
-        $this->hasMany(Siswa::class);
+        return $this->belongsTo(Siswa::class, 'id_siswa', 'id');
+        // return $this->hasMany(Siswa::class, 'id', 'id_siswa');
+        // return $this->hasOne(Siswa::class, 'id', 'id_siswa');
     }
 
     public function kelas() {
-        $this->belongsTo(Kelas::class);
+        return $this->belongsTo(Kelas::class, 'id_kelas','id');
+        // return $this->hasMany(Kelas::class, 'id','id_kelas');
+    }
+
+    public function kelas_pengajaran()
+    {
+        return $this->hasMany(Guru_mengajar::class, 'id_kelas', 'id_kelas');
     }
 }

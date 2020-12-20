@@ -11,46 +11,7 @@
 <div class="wrapper">
 
   <!-- Navbar -->
-  <nav class="main-header navbar navbar-expand navbar-white navbar-light">
-    <!-- Left navbar links -->
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
-      </li>
-    </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <!-- Messages Dropdown Menu -->
-     
-      <!-- Notifications Dropdown Menu -->
-      <li class="nav-item dropdown">
-        <a class="nav-link" data-toggle="dropdown" href="#">
-          <i class="far fa-bell"></i>
-          <span class="badge badge-warning navbar-badge">15</span>
-        </a>
-        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <span class="dropdown-item dropdown-header">15 Notifications</span>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-envelope mr-2"></i> 4 new messages
-            <span class="float-right text-muted text-sm">3 mins</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-users mr-2"></i> 8 friend requests
-            <span class="float-right text-muted text-sm">12 hours</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item">
-            <i class="fas fa-file mr-2"></i> 3 new reports
-            <span class="float-right text-muted text-sm">2 days</span>
-          </a>
-          <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
-        </div>
-      </li>
-    </ul>
-  </nav>
+   @include('layouts.partials.navbar')
   <!-- /.navbar -->
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
@@ -63,7 +24,7 @@
           <img src="{{asset('img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ __('Alexander Pierce') }}</a>
+          <a href="#" class="d-block">{{ Str::upper(Auth::user()->name) }}</a>
         </div>
       </div>
       <!-- Sidebar Menu -->
@@ -72,7 +33,7 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item menu-open">
-            <a href="{{ route('siswa.home') }}" class="nav-link active">
+            <a href="{{ route('guru.home') }}" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -90,21 +51,9 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-              <a href="{{ route('guru.list_siswa') }}" class="nav-link">
+              <a href="{{ route('guru.data_kelas.index') }}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Siswa</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('guru_list_tugas') }}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Tugas</p>
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('guru.list_nilai')}}" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Data Nilai</p>
+                  <p>Data Kelas</p>
                 </a>
               </li>
             </ul>
@@ -118,7 +67,7 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="content-header" style="padding-top:45px !important">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -126,7 +75,7 @@
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item"><a href="{{ route('guru.home')}}">Home</a></li>
                <li class="breadcrumb-item active">@yield('halaman')</li>
             </ol>
           </div><!-- /.col -->
@@ -134,22 +83,62 @@
       </div><!-- /.container-fluid -->
     </div>
     <!-- /.content-header -->
+      <section class="container">
 
+      {{-- template from blade --}}
+      @isset($msg)
+        <div role="alert" class="alert alert-{{ ($type == 'error') ? 'warning' : 'info'}} alert-dismissible fade show" id="msg-content">
+          <h4 class="alert-heading">{{($type == 'error') ? "Wops!": "Success!"}}</h4>
+          {{ $msg }}
+          {{-- dismis alert --}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position:relative;top:-30px;">
+              <span>&times;</span>
+          </button>
+        </div>
+      @endisset
+
+      {{-- template from ajax jqurry --}}
+      <div class="alert alert-success hidden" id="msg-app-content">
+        <p id="msg-app-data"></p>
+         {{-- dismis alert --}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position:relative;top:-30px;">
+            <span>&times;</span>
+        </button>
+      </div>
+    </section>
+      <section class="container">
+
+      {{-- template from blade --}}
+      @isset($msg)
+        <div role="alert" class="alert alert-{{ ($type == 'error') ? 'warning' : 'info'}} alert-dismissible fade show" id="msg-content">
+          <h4 class="alert-heading">{{($type == 'error') ? "Wops!": "Success!"}}</h4>
+          {{ $msg }}
+          {{-- dismis alert --}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position:relative;top:-30px;">
+              <span>&times;</span>
+          </button>
+        </div>
+      @endisset
+
+      {{-- template from ajax jqurry --}}
+      <div class="alert alert-success hidden" id="msg-app-content">
+        <p id="msg-app-data"></p>
+         {{-- dismis alert --}}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="position:relative;top:-30px;">
+            <span>&times;</span>
+        </button>
+      </div>
+    </section>
     <!-- Main content -->
     <section class="content">
       @yield('content')
     </section>
     <!-- /.content -->
-  </div>
-  <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2020 <a href="https://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.1.0-rc
-    </div>
-  </footer>
+    {{-- modal section --}}
+      @include('layouts.partials.modal')
+    {{-- end modal --}}
 
+  </div>
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
     <!-- Control sidebar content goes here -->
@@ -159,6 +148,8 @@
 <!-- ./wrapper -->
 
 @include("layouts.partials.footer")
+
+@stack('javascript')
 
 </body>
 </html>

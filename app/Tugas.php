@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tugas extends Model
 {
+     /* tabel name */
+    protected $table = 'tbl_tugas';
     /**
      * The attributes that should be mutated to dates.
      *
@@ -27,4 +29,6 @@ class Tugas extends Model
     public function siswa_tugas() {
         $this->belongsTo(Siswa_tugas::class);
     }
+
+  
 }

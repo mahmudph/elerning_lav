@@ -2,12 +2,12 @@
 
 namespace App;
 
-use App\siswa_kelas;
-use App\Siswa_tugas;
 use Illuminate\Database\Eloquent\Model;
 
 class Kelas extends Model
 {
+     /* tabel name */
+    protected $table = 'tbl_kelas';
     /**
      * The attributes that should be mutated to dates.
      *
@@ -27,10 +27,15 @@ class Kelas extends Model
     ];
 
     public function siswa_kelas() {
-        $this->hasMany(Siswa_kelas::class);
+        return $this->belongsTo(Siswa_kelas::class, 'id', 'id_kelas');
     }
 
     public function siswa_tugas() {
-        $this->hasMany(Siswa_tugas::class);
+        return $this->hasMany(Siswa_tugas::class);
+    }
+
+    public function guru_mengajar()
+    {
+        return $this->belongsTo(Guru_mengajar::class);
     }
 }

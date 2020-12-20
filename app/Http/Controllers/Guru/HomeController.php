@@ -2,8 +2,17 @@
 
 namespace App\Http\Controllers\Guru;
 
-use App\Http\Controllers\Controller;
+use App\Guru;
+use App\User;
+use App\Kelas;
+use App\Siswa;
+use App\Tugas;
+use App\Siswa_kelas;
+use App\Siswa_tugas;
+use App\Guru_mengajar;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -14,7 +23,32 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //
+        $title= "Dashboard" ;
+        $halaman = "Dashboard";
+
+        /* find id guru based auth login */
+        $user = Auth::user();
+        /* guru */
+        $guru = Guru::whereIdUser($user->id)->first();
+
+        /* data guru mengajar */
+        $data = Guru_mengajar::where('id_guru', $guru->id);
+        $data_guru_mengajar = $data->get()->pluck('id');
+        /* get data statistik pengajaran     */
+        $home = [
+            'count_kelas' =>  Kelas::WhereIn('id', $data->get()->pluck('id_kelas'))->count() ,
+            'count_pelajaran' => Guru_mengajar::whereIdGuru($guru->id)->count(),
+            'count_siswa' => Guru_mengajar::with('siswa_kelas')->whereIdGuru($guru->id)->count(),
+            'count_tugas' => Siswa_tugas::whereIn('id_guru_mengajar',isset($data_guru_mengajar) ? $data_guru_mengajar->toArray() : null)->count(),
+        ];
+        /* data respon */
+        $respon = [
+            'title' => $title,
+            'halaman' => $halaman,
+            'home' => $home
+        ];
+
+        return view('guru.home.index')->with($respon);
     }
 
     /**
@@ -67,7 +101,7 @@ class HomeController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update()
     {
         //
     }

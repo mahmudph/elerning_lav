@@ -1,4 +1,5 @@
 
+<meta name="csrf-token" content="{{ csrf_token() }}">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
 <!-- Font Awesome -->
 <link rel="stylesheet" href="{{ asset('plugins/fontawesome-free/css/all.min.css') }}">
@@ -18,3 +19,13 @@
 <link rel="stylesheet" href="{{ asset('plugins/daterangepicker/daterangepicker.css') }}">
 <!-- summernote -->
 <link rel="stylesheet" href="{{ asset('plugins/summernote/summernote-bs4.min.css') }}">
+
+<link rel="stylesheet" type="text/css" href="{{ asset('css/datatables.min.css') }}"/>
+
+<style>
+.hidden {
+  display: none;
+}
+th.dt-center, td.dt-center { text-align: center; }
+
+ </style>

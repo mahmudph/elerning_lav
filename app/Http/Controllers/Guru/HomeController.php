@@ -32,6 +32,24 @@ class HomeController extends Controller
         $guru = Guru::whereIdUser($user->id)->first();
 
         /* data guru mengajar */
+        if(empty($guru)) {
+            $home = [
+                'count_kelas' => 0,
+                'count_pelajaran' => 0,
+                'count_siswa' => 0,
+                'count_tugas' => 0,
+            ];
+            /* data respon */
+            $respon = [
+                'title' => $title,
+                'halaman' => $halaman,
+                'home' => $home,
+                'msg' => 'Anda belum terdaftar menjadi guru',
+                'type' => 'error'
+            ];
+            return view('guru.home.index')->with($respon);
+        }
+
         $data = Guru_mengajar::where('id_guru', $guru->id);
         $data_guru_mengajar = $data->get()->pluck('id');
         /* get data statistik pengajaran     */

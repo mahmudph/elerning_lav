@@ -23,13 +23,14 @@ class Siswa extends Model
      * @var array
      */
     protected $fillable = [
-        'nama_siswa', 
-        'nis', 
-        'gender', 
-        'nomer_hp', 
-        'tgl_lahir', 
-        'tempat_lahir', 
-        'alamat', 
+        'nama_siswa',
+        'id_user',
+        'nis',
+        'gender',
+        'nomer_hp',
+        'tgl_lahir',
+        'tempat_lahir',
+        'alamat',
     ];
 
     public function kelas() {

@@ -12,12 +12,13 @@ class Guru extends Model
       * @var array
       */
      protected $fillable = [
-        'nama_guru', 
-        'nip', 
-        'nomer_hp', 
-        'tgl_lahir', 
-        'tempat_lahir', 
-        'alamat', 
+        'nama_guru',
+        'nip',
+        'id_user',
+        'nomer_hp',
+        'tgl_lahir',
+        'tempat_lahir',
+        'alamat',
         'lulusan'
      ];
 

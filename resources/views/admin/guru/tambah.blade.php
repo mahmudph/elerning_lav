@@ -6,7 +6,7 @@
           @csrf
           <label for="nama">Nama </label>
           <input type="hidden" name="id" >
-          <input type="text" class="form-control" placeholder="Nama guru" id="nama" name="nama" >
+          <input type="text" class="form-control" placeholder="Nama guru" id="nama" name="nama_guru" >
         </div>
         <div class="form-group">
           <label for="id_user">User</label>
@@ -41,6 +41,10 @@
         <div class="form-group">
           <label for="tempat_lahir">Tempat Lahir</label>
         <input type="text" class="form-control" placeholder="Tempat lahir" id="nip" name="tempat_lahir">
+        </div>
+        <div class="form-group">
+            <label for="tempat_lahir">Lulusan</label>
+            <input type="text" class="form-control" placeholder="Lulusan" id="nip" name="lulusan">
         </div>
         <div class="form-group">
           <label for="nip">Alamat</label>

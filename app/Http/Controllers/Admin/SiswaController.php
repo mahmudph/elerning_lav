@@ -45,10 +45,10 @@ class SiswaController extends Controller
     public function validatePostRequest($request) {
         /* validatasi data post */
         $check = [
-            'id_user' => 'required|number',
+            'id_user' => 'required|numeric',
             'nama_siswa' => 'required',
             'nis' => 'required',
-            'gender' => 'required|number|in:[1,2]',
+            'gender' => 'required|numeric',
             'nomer_hp' => 'required',
             'tgl_lahir' => 'required|date',
             'tempat_lahir' => 'required',
@@ -152,7 +152,7 @@ class SiswaController extends Controller
                 /* get siswa berdasarkan id_kelas */
                 $result = Siswa_kelas::where('id_kelas', $id_kelas);
                 /* check data */
-                $siswa = $result->first()->siswa != null ? $result->get()->toquery() : [];
+                $siswa = $result->count() > 0 ? $result->get()->toquery() : [];
             } else {
                 $siswa = Siswa::query();
             }
@@ -160,28 +160,28 @@ class SiswaController extends Controller
             ->addIndexColumn()
             ->editColumn('nis', function($query) use($id_kelas) {
                 if($id_kelas) {
-                    return $query->siswa->first()['nis'];
+                    return $query->siswa->nis;
                 }
                 return $query->nama_siswa;
             })
             ->editColumn('nama_siswa', function($query)use($id_kelas) {
                 if($id_kelas) {
-                    return $query->siswa->first()['nama_siswa'];
+                    return $query->siswa->nama_siswa;
                 }
                 return $query->nama_siswa;
 
             })
             ->editColumn('nomer_hp', function($query)use($id_kelas) {
                 if($id_kelas) {
-                    return $query->siswa->first()['nomer_hp'];
+                    return $query->siswa->nomer_hp;
                 }
                 return $query->nama_siswa;
 
             })
             ->editColumn('gender', function($query) use($id_kelas) {
                 if($id_kelas) {
-                    if($query->siswa->first()['gender'])
-                        return config('master.gender.'.$query->siswa->first()['gender']);
+                    if($query->siswa->gender)
+                        return config('master.gender.'.$query->siswa->gender);
                     else
                         return null;
                 } else {

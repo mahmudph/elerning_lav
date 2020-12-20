@@ -43,12 +43,12 @@ class GuruController extends Controller
     public function validatePostRequest($request) {
         /* validatasi data post */
         $check = [
-            'id_user' => 'required|number',
-            'nama_siswa' => 'required',
+            'id_user' => 'required|numeric',
+            'nama_guru' => 'required',
             'nip' => 'required',
-            'gender' => 'required|number|in:[1,2]',
+            'gender' => 'required|numeric',
             'nomer_hp' => 'required',
-            'tgl_lahir' => 'required|date', 
+            'tgl_lahir' => 'required|date',
             'tempat_lahir' => 'required',
             'lulusan' => 'required',
         ];
@@ -76,7 +76,7 @@ class GuruController extends Controller
      */
     public function show($id)
     {
-       
+
     }
 
     /**
@@ -131,11 +131,11 @@ class GuruController extends Controller
 
     /**
      * function to render yijra data table
-     * @params  request, 
+     * @params  request,
      * query string as id kelas
-     * return view 
+     * return view
      */
-    public function data(Request $request) 
+    public function data(Request $request)
     {
 
         if($request->ajax()) {
@@ -158,7 +158,7 @@ class GuruController extends Controller
             ->addColumn('action', function($query) use($id_kelas) {
                 if($id_kelas != null) {
                     return " <a href='#' class='text-center btn btn-xs btn-danger delete' data-toggle='modal' data-target='#modalContent' id_target='".$query->mengajar[0]->id."'><span class='fas fa-1x fa-trash'></span></a>";
-                } 
+                }
                 return "<div class='btn-group' role='group'>
                     <a href='#' class='text-center btn btn-xs btn-info edit' data-toggle='modal' data-target='#modalContent' id_target='".$query->id."'><span class='fas fa-1x fa-edit'></span></a>
                     <a href='#' class='text-center btn btn-xs btn-danger delete' data-toggle='modal' data-target='#modalContent' id_target='".$query->id."'><span class='fas fa-1x fa-trash'></span></a>

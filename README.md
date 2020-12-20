@@ -3,9 +3,9 @@
 ## Step instalasi bisa dilakukan dengan menggunakan perintah berikut
 
 -   composer install
+-   ganti nama database menjadi **db_elerning** di file **env**
 -   php artisan migrate
 -   php artisan db:seed
--   ganti nama database menjadi **db_elerning** di file **env**
 
 <hr
 ### login admin

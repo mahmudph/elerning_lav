@@ -26,6 +26,7 @@ let advancedColumn =[
 	{ data: 'nis', name:'nis'},
 	{ data: 'gender', name:'gender'},
 	{ data: 'nomer_hp', name:"nomer_hp"},
+    { data: 'action', name:"action"},
 ];
 
 function getDataTablesSiswa(url = defaultUrl) {

@@ -15,6 +15,7 @@ class CreateTblNilaiTugas extends Migration
     {
          Schema::create('tbl_nilai_tugas', function (Blueprint $table) {
             $table->id();
+            $table->integer('id_pengerjaan_tugas');
             $table->double('nilai')->nullable();
             $table->string('keterangan')->nullable();
             $table->timestamps();

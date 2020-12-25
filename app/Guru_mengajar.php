@@ -56,7 +56,7 @@ class Guru_mengajar extends Model
     }
 
     public function siswa_kelas() {
-        return $this->belongsTo(Siswa_kelas::class, 'id_kelas', 'id_kelas');
+        return $this->hasMany(Siswa_kelas::class, 'id_kelas', 'id_kelas');
     }
 
     public function get_pengajaran() {

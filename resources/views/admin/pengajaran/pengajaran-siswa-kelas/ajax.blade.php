@@ -2,8 +2,8 @@
 
 
 
-/* 
-* options showuld be array with string type 
+/*
+* options showuld be array with string type
 * return void
 */
 function generateButton(type = 'save') {
@@ -11,7 +11,7 @@ function generateButton(type = 'save') {
   let button = [
     `<button type="button" id="modal-close" class="btn btn-danger btn-sm" data-dismiss="modal">Close</button>`,
     `<button type="button" id="modal-${type}"  class="btn btn-info btn-sm">Simpan</button>`
-  ]; 
+  ];
 
     /* add custom button */
     $('#modal-footer').html(button.join());
@@ -39,24 +39,25 @@ $(document).on('click', '.delete', function() {
   /* request to api */
   goAjaxGet(url).then(_ => {
     let hapusButton = [
-       `<button type="button" id="modal-hapus" class="btn btn-danger btn-sm" data-dismiss="modal" 
+       `<button type="button" id="modal-hapus" class="btn btn-danger btn-sm" data-dismiss="modal"
         onclick="event.preventDefault(); document.getElementById('form-delete').submit();"
        >Hapus</button>`,
     ];
     $('#modal-footer').html(hapusButton.join());
   });
-  
+
 });
 
 $(document).on('click', '#tambah', function() {
-  let url = `{{ route('admin.pengajaran-siswa-kelas.create') }}`;
-  /* change size modal */
-  $('.modal-dialog').addClass('modal-lg');
-  $('#msg-content').hide();
+    let kelas_id =$(this).attr('kelas-id');
+    let url = `{{ route('admin.pengajaran-siswa-kelas.create') }}?id_kelas=${kelas_id}`;
+    /* change size modal */
+    $('.modal-dialog').addClass('modal-lg');
+    $('#msg-content').hide();
 
-  goAjaxGet(url).then(_ => {
-    generateButton();
-  });
+    goAjaxGet(url).then(_ => {
+        generateButton();
+    });
 })
 
 </script>

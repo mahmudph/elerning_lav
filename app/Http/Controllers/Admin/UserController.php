@@ -42,7 +42,7 @@ class UserController extends Controller
                 'email' => 'required|email',
                 'password' => 'required|min:8',
                 'conf_pass' => 'required|min:8|same:password',
-                'role' => 'required|in:["siswa", "guru", "admin"]'
+                'role' => 'required'
             ];
         } else {
              $check = [
@@ -50,7 +50,7 @@ class UserController extends Controller
                 'email' => 'required|email',
                 'password' => 'nullable|min:8',
                 'conf_pass' => 'nullable|min:8|same:password',
-                'role' => 'required|in:["siswa", "guru", "admin"]'
+                'role' => 'required'
             ];
         }
         return $request->validate($check);

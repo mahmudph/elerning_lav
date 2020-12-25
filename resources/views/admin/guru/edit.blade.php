@@ -41,6 +41,10 @@
           <label for="tempat_lahir">Tempat Lahir</label>
         <input type="text" class="form-control" placeholder="Tempat lahir" id="nip" name="tempat_lahir" value="{{ $guru->tempat_lahir }}">
         </div>
+           <div class="form-group">
+            <label for="tempat_lahir">Lulusan</label>
+           <input type="text" class="form-control" placeholder="Lulusan" id="nip" name="lulusan" value="{{ $guru->lulusan }}">
+        </div>
         <div class="form-group">
           <label for="alamat">Alamat</label>
         <textarea name="alamat" id="" cols="30" rows="5" class="form-control">{{ $guru->alamat }}</textarea>

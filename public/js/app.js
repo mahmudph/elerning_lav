@@ -9,6 +9,9 @@ function goAjaxGet(targetUrl, $button) {
         url: targetUrl,
         dataType: "html",
         cache: false,
+        headers: {
+            "X-CSRF-TOKEN": $('meta[name="csrf-token"]').attr("content")
+        },
         success: function(data) {
             $("#modal_content_body").html(data);
         }
@@ -18,7 +21,6 @@ function goAjaxGet(targetUrl, $button) {
 /* handel tambah data modal */
 $(document).on("click", "#modal-save", function(event) {
     var dataForm = $("#form-tambah").serialize();
-    console.log(dataForm);
     $.ajax({
         type: "POST",
         data: dataForm,

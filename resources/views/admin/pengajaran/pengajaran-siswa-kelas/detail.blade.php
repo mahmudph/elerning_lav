@@ -8,10 +8,10 @@
     <div class="card">
       <div class="card-header">
          <div class="float-left p-1 p-sm-1">
-          <h6>Guru Pengajar Kelas <b>{{ $kelas->nama_kelas ?? ""}}</b></h6>
+          <h6>Siswa <b>{{ $kelas->nama_kelas ?? ""}}</b></h6>
           </div>
           <div class="float-right">
-            {{-- <button class="btn btn-sm btn-info float-right ml-1" id="tambah" data-toggle='modal' data-target='#modalContent'>Tambah</button> --}}
+          <button class="btn btn-sm btn-info float-right ml-1" id="tambah" kelas-id="{{ $kelas->id }}" data-toggle='modal' data-target='#modalContent'>Tambah Siswa</button>
             <a href="{{ url()->previous() }}" class="btn btn-sm btn-danger float-right" >kembali</a>
           </div>
       </div>
@@ -24,7 +24,7 @@
               <th>Nis</th>
               <th>Gender</th>
               <th>Nomer Hp</th>
-              {{-- <th width="50px">Action</th> --}}
+              <th width="50px">Action</th>
             </tr>
           </thead>
         </table>

@@ -190,7 +190,7 @@ class SiswaController extends Controller
             })
             ->addColumn('action', function($query) use ($id_kelas) {
                 if($id_kelas) {
-                    return "<a href='#' class='text-center btn btn-xs btn-danger delete' data-toggle='modal' data-target='#modalContent' id_target='".$id_kelas."'><span class='fas fa-1x fa-trash'></span></a>";
+                    return "<a href='#' class='text-center btn btn-xs btn-danger delete' data-toggle='modal' data-target='#modalContent' id_target='".$query->id."'><span class='fas fa-1x fa-trash'></span></a>";
                 }
                 return "<div class='btn-group' role='group'>
                     <a href='#' class='text-center btn btn-xs btn-info edit' data-toggle='modal' data-target='#modalContent' id_target='".$query->id."'><span class='fas fa-1x fa-edit'></span></a>

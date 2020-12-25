@@ -53,10 +53,22 @@ class HomeController extends Controller
         $data = Guru_mengajar::where('id_guru', $guru->id);
         $data_guru_mengajar = $data->get()->pluck('id');
         /* get data statistik pengajaran     */
+
+        $siswa = [];
+        $total_siswa = 0;
+
+        foreach(Guru_mengajar::whereIdGuru($guru->id)->get() as $guru) {
+            array_push($siswa, $guru->siswa_kelas->count());
+        }
+
+        foreach($siswa as $item) {
+            $total_siswa += $item;
+        }
+
         $home = [
             'count_kelas' =>  Kelas::WhereIn('id', $data->get()->pluck('id_kelas'))->count() ,
             'count_pelajaran' => Guru_mengajar::whereIdGuru($guru->id)->count(),
-            'count_siswa' => Guru_mengajar::with('siswa_kelas')->whereIdGuru($guru->id)->count(),
+            'count_siswa' => $total_siswa,
             'count_tugas' => Siswa_tugas::whereIn('id_guru_mengajar',isset($data_guru_mengajar) ? $data_guru_mengajar->toArray() : null)->count(),
         ];
         /* data respon */

@@ -16,7 +16,9 @@ class CreateTblPelajaransTable extends Migration
         Schema::create('tbl_pelajarans', function (Blueprint $table) {
             $table->id();
             $table->string('nama_pelajaran')->nullable();
+            $table->text('deskripsi');
             $table->timestamps();
+
         });
     }
 

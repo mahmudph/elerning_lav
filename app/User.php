@@ -9,13 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable
-{   
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = ['password'];
+{
 
      /* tabel name */
     protected $table = 'tbl_users';
@@ -25,13 +19,12 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 
+        'name',
         'email',
         'password',
         'remember_token',
         'role'
     ];
-
     /**
      * The attributes that should be mutated to dates.
      *
@@ -47,5 +40,9 @@ class User extends Authenticatable
     public function guru()
     {
         return $this->belongsTo(Guru::class);
+    }
+
+    public function setPasswordAttribute($value) {
+        $this->attributes['password'] = bcrypt($value);
     }
 }
